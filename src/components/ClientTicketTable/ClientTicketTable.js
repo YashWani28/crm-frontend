@@ -16,7 +16,7 @@ export const ClientTicketTable = ({dummydata}) => {
                 return (
                     <tr key={indx+1}>
                         <td>{indx+1}</td>
-                        <td>{data.subject}</td>
+                        <td>{data.issue}</td>
                         <td>{data.status}</td>
                         <td>{data.opendate}</td>
                     </tr>
