@@ -2,10 +2,16 @@ import React from 'react'
 import { Container,Row,Col,Button } from 'react-bootstrap'
 import { ClientTicketTable } from '../../components/ClientTicketTable/ClientTicketTable'
 import dummydata from '../../assets/dummyticket.json';
+import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb';
 
 export const ClientDashboard = () => {
   return (
     <Container>
+        <Row>
+            <Col>
+                <ClientBreadCrumb page="dashboard"></ClientBreadCrumb>
+            </Col>
+        </Row>
         <Row>
             <Col className='text-center mt-3 mb-3'>
                 <Button variant='info' style={{fontSize:"2rem",padding:"10px 30px",color:"white"}}>

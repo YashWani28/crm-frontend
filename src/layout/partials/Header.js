@@ -7,7 +7,7 @@ export const Header = () => {
 
             <Navbar collapseOnSelect expand="lg"  bg="info">
                 <Container>
-                    <Navbar.Brand href="#home">Support</Navbar.Brand>
+                    <Navbar.Brand href="#home">CRM-Support</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
