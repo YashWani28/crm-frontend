@@ -1,8 +1,25 @@
+
 [
     {
-        "issue":"broken goods in shipment",
+        "issue":"Broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "description":"will be added for all the tickets in this array later...",
+        "feedback":"will be added for all tickets in the future",
+        "messagehistory":[
+            {
+                "sentby":"client",
+                "messagebody":" Hi, I received my package today, but unfortunately, some of the items inside are broken ",
+                "messagedate":"2024-04-24",
+                "messagetime":"17:00"
+            },
+            {
+                "sentby":"operator",
+                "messagebody":"Hello, I'm sorry to hear that some of your items arrived damaged. Can you please provide me with your order number so I can look into this for you?",
+                "messagedate":"2024-04-24",
+                "messagetime":"21:00"
+            }
+        ]
     },
     {
         "issue":"payment not received",

@@ -5,11 +5,12 @@ import { DefaultLayout } from './layout/DefaultLayout';
 import { ClientDashboard } from './pages/Dashboard/ClientDashboard';
 import { ClientAddTicket } from './pages/ClientAddTicket/ClientAddTicket';
 import { ClientTicketListing } from './pages/ClientTicketListingPage/ClientTicketListing';
+import { ClientTicketPage } from './pages/ClientTicketPages/ClientTicketPage';
 function App() {
   return (
     <div className="App">
       <DefaultLayout>
-        <ClientTicketListing></ClientTicketListing>
+        <ClientTicketPage></ClientTicketPage>
       </DefaultLayout>
     </div>
   );
