@@ -3,6 +3,7 @@ import './App.css';
 import { DefaultLayout } from './layout/DefaultLayout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import {Notfound} from './pages/NotFoundPage404/Notfound';
 import { ClientLogin } from './pages/ClientLogin/ClientLogin';
 import { ClientDashboard } from './pages/Dashboard/ClientDashboard';
@@ -17,10 +18,10 @@ function App() {
 
           <Route path='/login' element={<ClientLogin />} />
         
-          <Route path="dashboard" element={<DefaultLayout><ClientDashboard /></DefaultLayout>} />
-          <Route path="addticket" element={<DefaultLayout><ClientAddTicket /></DefaultLayout>} />
-          <Route path="ticketlists" element={<DefaultLayout><ClientTicketListing /></DefaultLayout>} />
-          <Route path="ticket/:id" element={<DefaultLayout><ClientTicketPage /></DefaultLayout>} />
+          <Route path="dashboard" element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
+          <Route path="addticket" element={<PrivateRoute><ClientAddTicket /></PrivateRoute>} />
+          <Route path="ticketlists" element={<PrivateRoute><ClientTicketListing /></PrivateRoute>} />
+          <Route path="ticket/:Tid" element={<PrivateRoute><ClientTicketPage /></PrivateRoute>} />
           <Route path="*" Component={Notfound}></Route>  
           
 

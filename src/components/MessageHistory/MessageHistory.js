@@ -7,7 +7,7 @@ export const MessageHistory = ({ history }) => {
 
   return (
     <Container className='messagehistory'>
-      {history.map((message, i) => {
+      {history.length!==0 ? history.map((message, i) => {
         return (
           <Row key={i} className='mb-5'>
             {message.sentby === "client" &&
@@ -32,7 +32,7 @@ export const MessageHistory = ({ history }) => {
             }
           </Row>
         )
-      })}
+      }):<Row >No Messages !</Row>}
     </Container>
   )
 }

@@ -24,56 +24,67 @@
     {
         "issue":"payment not received",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"In Resolution",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"payment not received",
         "status":"Issue Resolved",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-25"
+        "opendate":"2024-04-25",
+        "messagehistory":[]
     },
     {
         "issue":"payment not received",
         "status":"Response Pending",
-        "opendate":"2024-04-26"
+        "opendate":"2024-04-26",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-27"
+        "opendate":"2024-04-27",
+        "messagehistory":[]
     },
     {
         "issue":"broken goods in shipment",
         "status":"Response Pending",
-        "opendate":"2024-04-24"
+        "opendate":"2024-04-24",
+        "messagehistory":[]
     }
 ]
