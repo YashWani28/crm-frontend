@@ -36,6 +36,8 @@ export const ClientAddTicket = () => {
                     <AddTicketForm handleOnChange={handleOnChange} formData={formData} handleOnClick={handleOnClick}></AddTicketForm>
                 </Col>
             </Row>
+            <br/>
+
         </Container>
     )
 }

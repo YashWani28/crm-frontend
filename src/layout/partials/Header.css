@@ -1,0 +1,10 @@
+.nav-link {
+    color: black; /* Default color for non-active links */
+  }
+  
+  .nav-link.active,
+  .nav-link:hover {
+    color: white !important; /* Color for active and hovered links */
+  }
+  
+  

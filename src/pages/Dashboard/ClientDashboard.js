@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Container,Row,Col,Button } from 'react-bootstrap'
 import { ClientTicketTable } from '../../components/ClientTicketTable/ClientTicketTable'
 import dummydata from '../../assets/dummyticket.json';
@@ -14,9 +15,11 @@ export const ClientDashboard = () => {
         </Row>
         <Row>
             <Col className='text-center mt-3 mb-3'>
-                <Button variant='info' style={{fontSize:"2rem",padding:"10px 30px",color:"white"}}>
-                    Create Ticket
-                </Button>
+                <Link to="/addticket">
+                    <Button variant='info' style={{fontSize:"2rem",padding:"10px 30px",color:"white"}}>
+                        Create Ticket
+                    </Button>
+                </Link>
             </Col>
         </Row>
         <Row>

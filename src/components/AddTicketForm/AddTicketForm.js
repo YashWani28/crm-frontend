@@ -35,7 +35,7 @@ export const AddTicketForm = ({handleOnChange,handleOnClick}) => {
                     as="textarea"
                     placeholder='Describe your issue in short'
                     onChange={handleOnChange}
-                    row="5"
+                    rows="5"
                     type="text"     
                     name='desc'
                     required
@@ -46,7 +46,7 @@ export const AddTicketForm = ({handleOnChange,handleOnClick}) => {
                     <FormLabel>Feedback/Scope of improvement</FormLabel>
                     <FormControl
                     as="textarea"
-                    row="3"
+                    rows="3"
                     type="text"  
                     onChange={handleOnChange}
 
@@ -55,6 +55,8 @@ export const AddTicketForm = ({handleOnChange,handleOnClick}) => {
                 </FormGroup>
                 <br/>
                 <Button type="submit" style={{width:"100%"}} onClick={handleOnClick}>Create Ticket</Button>
+                <br/>
+
             </Form>       
   )
 }

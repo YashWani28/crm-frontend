@@ -1,0 +1,4 @@
+.hoverrow:hover {
+    color:rgba(23, 132, 228, 0.386)  !important;
+    transition:0.5ms  !important;
+}

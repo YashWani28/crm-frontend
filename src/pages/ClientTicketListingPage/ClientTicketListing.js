@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb';
 import { ClientTicketTable } from '../../components/ClientTicketTable/ClientTicketTable';
@@ -8,11 +9,11 @@ export const ClientTicketListing = () => {
     const [searchStr, setSearchStr] = useState('');
     const [displayData, setDisplayData] = useState(dummydata);
 
-    const initialstatusdate={
-        "status":"All",
-        "date":"" 
+    const initialstatusdate = {
+        "status": "All",
+        "date": ""
     }
-    const [statusdate,setstatusdate] = useState(initialstatusdate);
+    const [statusdate, setstatusdate] = useState(initialstatusdate);
 
     useEffect(() => {
         search(searchStr);
@@ -31,7 +32,7 @@ export const ClientTicketListing = () => {
     const handleOnChangeParams = (e) => {
         const { name, value } = e.target;
         setstatusdate(statusdate => ({ ...statusdate, [name]: value }));
-      
+
     };
 
     const search = (value) => {
@@ -42,15 +43,15 @@ export const ClientTicketListing = () => {
     };
 
     const filters = () => {
-        let filterdate=statusdate.date;
-        let filterstatus=statusdate.status;
-        if(statusdate.date===''){
-            filterdate=false 
+        let filterdate = statusdate.date;
+        let filterstatus = statusdate.status;
+        if (statusdate.date === '') {
+            filterdate = false
         }
-        if(statusdate.status==='All'){
-            filterstatus=false;
+        if (statusdate.status === 'All') {
+            filterstatus = false;
         }
-        const filteredData = dummydata.filter((row)=>!filterstatus || row.status===filterstatus).filter((row1)=>!filterdate || row1.opendate===filterdate)
+        const filteredData = dummydata.filter((row) => !filterstatus || row.status === filterstatus).filter((row1) => !filterdate || row1.opendate === filterdate)
         setDisplayData(filteredData);
 
     }
@@ -65,22 +66,24 @@ export const ClientTicketListing = () => {
             <br />
             <Row>
                 <Col>
-                    <Button className='info'>Create Ticket</Button>
+                    <Link to='/addticket'>
+                        <Button className='info'>Create Ticket</Button>
+                    </Link>
                 </Col>
                 <Col>
                     <Form>
                         <FormGroup as={Row}>
-                            
-                                <FormLabel column sm={2}>Issue name: </FormLabel>
-                                <Col sm={10}>
-                                    <FormControl
-                                        type="text"
-                                        placeholder="Search..."
-                                        name="ticketsearch"
-                                        onChange={handleOnChangeSearch}
-                                    />
-                                </Col>
-                            
+
+                            <FormLabel column sm={2}>Issue name: </FormLabel>
+                            <Col sm={10}>
+                                <FormControl
+                                    type="text"
+                                    placeholder="Search..."
+                                    name="ticketsearch"
+                                    onChange={handleOnChangeSearch}
+                                />
+                            </Col>
+
                         </FormGroup>
                     </Form>
                 </Col>
@@ -104,7 +107,7 @@ export const ClientTicketListing = () => {
                             <Col>
                                 <Form.Group controlId="dateField">
                                     <Form.Label>Date</Form.Label>
-                                    <Form.Control style={{ width: "100%" }} type="date"  onChange={handleOnChangeParams} name="date"/>
+                                    <Form.Control style={{ width: "100%" }} type="date" onChange={handleOnChangeParams} name="date" />
                                 </Form.Group>
                             </Col>
                         </Row>
