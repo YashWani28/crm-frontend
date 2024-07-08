@@ -3,27 +3,22 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb';
 import { ClientTicketTable } from '../../components/ClientTicketTable/ClientTicketTable';
-import dummydata from "../../assets/dummyticket.json";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllTickets, applyFilters } from './ticketsAction';
 
 export const ClientTicketListing = () => {
     const [searchStr, setSearchStr] = useState('');
-    const [displayData, setDisplayData] = useState(dummydata);
-
-    const initialstatusdate = {
-        "status": "All",
-        "date": ""
-    }
-    const [statusdate, setstatusdate] = useState(initialstatusdate);
+    const [statusDate, setStatusDate] = useState({ status: "All", date: "" });
+    const dispatch = useDispatch();
+    //const tickets = useSelector(state => state.ticketList.filteredTickets);
 
     useEffect(() => {
-        search(searchStr);
-    }, [searchStr]);
+        dispatch(fetchAllTickets());
+    }, [dispatch]);
 
     useEffect(() => {
-        setstatusdate(statusdate);
-        //! add filter function here
-        filters();
-    }, [statusdate])
+        dispatch(applyFilters(searchStr, statusDate));
+    }, [searchStr, statusDate, dispatch]);
 
     const handleOnChangeSearch = (e) => {
         setSearchStr(e.target.value);
@@ -31,30 +26,8 @@ export const ClientTicketListing = () => {
 
     const handleOnChangeParams = (e) => {
         const { name, value } = e.target;
-        setstatusdate(statusdate => ({ ...statusdate, [name]: value }));
-
+        setStatusDate(prevState => ({ ...prevState, [name]: value }));
     };
-
-    const search = (value) => {
-        const filteredData = dummydata.filter((row) =>
-            row.issue.toLowerCase().includes(value.toLowerCase())
-        );
-        setDisplayData(filteredData);
-    };
-
-    const filters = () => {
-        let filterdate = statusdate.date;
-        let filterstatus = statusdate.status;
-        if (statusdate.date === '') {
-            filterdate = false
-        }
-        if (statusdate.status === 'All') {
-            filterstatus = false;
-        }
-        const filteredData = dummydata.filter((row) => !filterstatus || row.status === filterstatus).filter((row1) => !filterdate || row1.opendate === filterdate)
-        setDisplayData(filteredData);
-
-    }
 
     return (
         <Container>
@@ -73,7 +46,6 @@ export const ClientTicketListing = () => {
                 <Col>
                     <Form>
                         <FormGroup as={Row}>
-
                             <FormLabel column sm={2}>Issue name: </FormLabel>
                             <Col sm={10}>
                                 <FormControl
@@ -83,7 +55,6 @@ export const ClientTicketListing = () => {
                                     onChange={handleOnChangeSearch}
                                 />
                             </Col>
-
                         </FormGroup>
                     </Form>
                 </Col>
@@ -116,7 +87,7 @@ export const ClientTicketListing = () => {
             </Row>
             <br />
             <Row>
-                <ClientTicketTable dummydata={displayData} />
+                <ClientTicketTable  />
             </Row>
         </Container>
     );

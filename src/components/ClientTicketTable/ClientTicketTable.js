@@ -2,8 +2,13 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import "./ClientTicketTable.css";
+import { useSelector } from 'react-redux';
+import { convert } from '../../utils/serverDateToJSDate';
 
-export const ClientTicketTable = ({ dummydata }) => {
+export const ClientTicketTable = () => {
+    const {filteredTickets,isLoading,error} = useSelector(state => state.tickets);
+    if(isLoading)return <h3>Loading...</h3>
+    if(error)return <h3>{error}</h3>
     return (
         <Table striped bordered hover size="lg">
             <thead>
@@ -16,7 +21,7 @@ export const ClientTicketTable = ({ dummydata }) => {
                 </tr>
             </thead>
             <tbody>
-                {dummydata.length ? dummydata.map((data, indx) => {
+                {filteredTickets.length ? filteredTickets.map((data, indx) => {
                     return (
                         //! WOW !!!
                         <LinkContainer to={`/ticket/${indx}`} key={indx} className="table-link hoverrow">
@@ -24,7 +29,7 @@ export const ClientTicketTable = ({ dummydata }) => {
                                 <td>{indx + 1}</td>
                                 <td>{data.issue}</td>
                                 <td>{data.status}</td>
-                                <td>{data.opendate}</td>
+                                <td>{convert(data.openAt)}</td>
                             </tr>
                         </LinkContainer>
 
