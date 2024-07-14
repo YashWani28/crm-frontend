@@ -1,11 +1,15 @@
 import {configureStore} from "@reduxjs/toolkit";
 
 import ticketsreducer from './pages/ClientTicketListingPage/ticketSlice'
+import loginreducer from './components/ClientLoginForm/clientLoginSlice';
+import userreducer from './pages/Dashboard/userSlice';
 
 const store=configureStore({
     reducer:{
-        tickets:ticketsreducer
+        tickets:ticketsreducer,
+        login:loginreducer,
+        user:userreducer
     },
-});
+}); 
 
 export default store;

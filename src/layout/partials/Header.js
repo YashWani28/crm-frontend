@@ -4,6 +4,9 @@ import { Link,NavLink } from 'react-router-dom';
 import './Header.css'; // Import your custom CSS file for styling
 
 export const Header = () => {
+  const logout = ()=>{
+    sessionStorage.removeItem('CRM_accessJWT')
+  }
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="info">
@@ -17,7 +20,7 @@ export const Header = () => {
             </Nav>
             <Nav>
               <NavLink to="/login" className="nav-link">
-                <Button variant="outline-danger">Logout</Button>
+                <Button variant="outline-danger" onClick={logout}>Logout</Button>
               </NavLink>
             </Nav>
           </Navbar.Collapse>
