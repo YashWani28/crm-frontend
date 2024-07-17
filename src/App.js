@@ -17,7 +17,7 @@ function App() {
         <Routes>
 
           <Route path='/login' element={<ClientLogin />} />
-        
+          <Route path="logout" element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
           <Route path="dashboard" element={<PrivateRoute><ClientDashboard /></PrivateRoute>} />
           <Route path="addticket" element={<PrivateRoute><ClientAddTicket /></PrivateRoute>} />
           <Route path="ticketlists" element={<PrivateRoute><ClientTicketListing /></PrivateRoute>} />

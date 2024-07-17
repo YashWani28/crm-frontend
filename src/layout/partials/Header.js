@@ -1,11 +1,23 @@
 import React from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
-import { Link,NavLink } from 'react-router-dom';
+import { Link,Navigate,NavLink,useNavigate } from 'react-router-dom';
 import './Header.css'; // Import your custom CSS file for styling
+import { logoutUser } from '../../api/userApi';
+import { isTokenExpired } from '../../utils/decodeToken';
+
+
 
 export const Header = () => {
-  const logout = ()=>{
-    sessionStorage.removeItem('CRM_accessJWT')
+  const navigate=useNavigate();
+  const logout = async()=>{
+    alert("You have been logged out.");
+    if(!isTokenExpired(sessionStorage.getItem("CRM_accessJWT"))){
+      await logoutUser();
+
+    }
+    sessionStorage.removeItem('CRM_accessJWT');
+    localStorage.removeItem('CRM_refreshJWT');
+    navigate('/login');
   }
   return (
     <div>
@@ -19,7 +31,7 @@ export const Header = () => {
               <NavLink to="/ticketlists" className="nav-link">Tickets</NavLink>
             </Nav>
             <Nav>
-              <NavLink to="/login" className="nav-link">
+              <NavLink  className="nav-link">
                 <Button variant="outline-danger" onClick={logout}>Logout</Button>
               </NavLink>
             </Nav>

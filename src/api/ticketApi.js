@@ -11,10 +11,11 @@ export const getAllTickets = async () => {
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
+        // if (!response.ok) {
+        //     //alert(response.status);
+        //     throw new Error(`HTTP error! status: ${response.status}`);
+        // }
+        
         return await response.json();
     } catch (error) {
         throw new Error(error.message);

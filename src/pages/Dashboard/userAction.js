@@ -11,7 +11,7 @@ export const getUserProfile = () => async(dispatch)=>{
         const user=await fetchUser();
         if(user)
         {
-            console.log(user);
+           // console.log(user);
             dispatch(getUserSuccess(user))
 
         }

@@ -1,10 +1,12 @@
-import React,{useState,} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Container,Row,Col,Form,Button, FormControl, FormGroup, FormLabel,Spinner,Alert } from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import {loginPending,loginSuccess,loginFail} from './clientLoginSlice';
 import { userLogin } from '../../api/userApi';
 import {useNavigate} from "react-router-dom";
 import {getUserProfile} from '../../pages/Dashboard/userAction';
+import { isTokenExpired } from '../../utils/decodeToken';
+
 
 export const ClientLoginForm = (props) => {
     const dispatch = useDispatch();
@@ -12,6 +14,10 @@ export const ClientLoginForm = (props) => {
     const {isLoading,isAuth,error} = useSelector(state=>state.login)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(()=>{
+        (sessionStorage.getItem('CRM_accessJWT')) && !isTokenExpired(localStorage.getItem("CRM_refreshJWT")) && navigate("/dashboard" );
+    },[navigate,isAuth])
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
