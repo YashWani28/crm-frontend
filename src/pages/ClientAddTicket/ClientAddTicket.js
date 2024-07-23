@@ -3,23 +3,23 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb'
 import { AddTicketForm } from '../../components/AddTicketForm/AddTicketForm'
 export const ClientAddTicket = () => {
-    const initialdata = {
-        "issue":"",
-        "opendate":"",
-        "desc":"",
-        "feedback":""
-    }
-    const [formData,setformData] = useState(initialdata);
-    const handleOnChange = (e)=>{
-        const {name,value} = e.target;
-        setformData({...formData,[name]:value})
-        console.log(formData);
-    }
-    const handleOnClick = (e)=>{
-        e.preventDefault();
-        //* code for ticket creation API
-        console.log("Answer:",formData);
-    }
+    // const initialdata = {
+    //     "issue":"",
+    //     "opendate":"",
+    //     "desc":"",
+    //     "feedback":""
+    // }
+    // const [formData,setformData] = useState(initialdata);
+    // const handleOnChange = (e)=>{
+    //     const {name,value} = e.target;
+    //     setformData({...formData,[name]:value})
+    //     console.log(formData);
+    // }
+    // const handleOnClick = (e)=>{
+    //     e.preventDefault();
+    //     //* code for ticket creation API
+    //     console.log("Answer:",formData);
+    // }
     return (
         //* filters --> for status,opened date
         <Container style={{ maxWidth: "70%" }}>
@@ -33,7 +33,7 @@ export const ClientAddTicket = () => {
             </Row>
             <Row>
                 <Col>
-                    <AddTicketForm handleOnChange={handleOnChange} formData={formData} handleOnClick={handleOnClick}></AddTicketForm>
+                    <AddTicketForm></AddTicketForm>
                 </Col>
             </Row>
             <br/>

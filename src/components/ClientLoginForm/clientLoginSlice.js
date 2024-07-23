@@ -26,13 +26,18 @@ const loginSlice = createSlice({
         logout: (state) => {
           state.isAuth = false;
           state.error = '';
+        },
+        resetLoginState:(state)=>{
+            state.isLoading=initialState.isLoading
+            state.isAuth=initialState.isAuth
+            state.error=initialState.error
         }
     }
 });
 
 const {reducer,actions}=loginSlice
 
-export const {loginPending,loginSuccess,loginFail,logout}=actions;
+export const {loginPending,loginSuccess,loginFail,logout,resetLoginState}=actions;
 
 export default reducer;
 

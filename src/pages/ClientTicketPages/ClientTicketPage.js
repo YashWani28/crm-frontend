@@ -1,48 +1,44 @@
 import React,{useState,useEffect} from 'react'
-import { Col, Container, Row, Button } from 'react-bootstrap'
+import { Col, Container, Row, Button,Spinner,Alert } from 'react-bootstrap'
 import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb'
 import dummydata from '../../assets/dummyticket.json'
 import { MessageHistory } from '../../components/MessageHistory/MessageHistory'
 import { Chatbox } from '../../components/ChatBox/Chatbox'
 import { useParams,Navigate } from 'react-router-dom'
+import { fetchSingleTicket,closeTicketAction } from '../ClientTicketListingPage/ticketsAction'
 import { Notfound } from '../NotFoundPage404/Notfound'
+import { useDispatch,useSelector } from 'react-redux'
 
 export const ClientTicketPage = () => {
-    const [replytext,setreplytext] = useState("");
+    const [isFormDisabled,setisFormDisabled]=useState(false)
     const {Tid} = useParams();
     const [messages,setmessages] = useState([]);
+    const dispatch = useDispatch();
+    //const Tid=1;
+    const{isLoading,error,selectedTicket}=useSelector(state=>state.tickets);
 
+    useEffect(()=>{
+
+        if(selectedTicket.status==="Issue Resolved"){
+            setisFormDisabled(true);
+        }
+        else{
+            setisFormDisabled(false);
+        }
+    },[selectedTicket])
     useEffect(() => {
-        // Fetch ticket data using Tid and set messages
-        if (dummydata[Tid]) {
-            setmessages(dummydata[Tid].messagehistory);
-        } 
-        else {
-       
-            setmessages(null);
+        dispatch(fetchSingleTicket(Tid));
+      }, [Tid, dispatch]);
+    
+      useEffect(() => {
+        if (selectedTicket) {
+          setmessages(selectedTicket.messagehistory || []);
+        } else {
+          setmessages([]);
         }
-    }, [Tid]);
+      }, [selectedTicket]);
 
-    const handleOnChange = (e)=>{
-        const {name,value} = e.target;
-        setreplytext(value);
-    }
-
-    const handleOnClick = ()=>{
-        // if reply is empty then log nothing
-        if (!replytext.trim()) {
-            return;
-        }
-        setmessages([...messages,{
-            "sentby":"client",
-            "messagedate":"2024-04-27",
-            "messagetime":"23:58",
-            "messagebody":replytext
-        }])
-        setreplytext("");
-
-        
-    }
+    
 
     return (
         <Container>
@@ -55,26 +51,34 @@ export const ClientTicketPage = () => {
 
                 </Row>
                 <Row>
+                    {isLoading && <Spinner variant="primary" animation="border"/>}
+                    {error && <Alert variant="danger">{error}</Alert>}
+                </Row>
+                <Row>
                     <Col className='text-weight-bolder text-secondary'>
                         
-                        <div>Issue: {dummydata[0].issue}</div>
-                        <div>Date opened: {dummydata[0].opendate}</div>
+                        <div>Issue: {selectedTicket.issue || "Not found"}</div>
+                        <div>Date opened: {new Date(selectedTicket.openAt).toLocaleString()}</div>
+                        <div>Status: {selectedTicket.status }</div>
+                        <div>Ticket ID: {selectedTicket._id }</div>
+
+
                         {/* <div>Description: {dummydata[0].descrption}</div> */}
                     </Col>
                     <Col className="d-flex justify-content-end">
-                        <Button variant='outline-info '>Close Ticket</Button>
+                        <Button variant='outline-info ' onClick={()=>{dispatch(closeTicketAction(Tid))}} disabled={isFormDisabled}>Close Ticket</Button>
                     </Col>
                 </Row>
                 <hr />
                 <br />
                 <Row>
                     
-                    <MessageHistory history={messages}></MessageHistory>
+                    {selectedTicket.messagehistory&&(<MessageHistory history={messages}></MessageHistory>)}
                 </Row>
                 <br />
                 <Row>
                     <Col>
-                        <Chatbox handleOnChange={handleOnChange} handleOnClick={handleOnClick} text={replytext}></Chatbox>
+                        <Chatbox messages={messages} setmessages={setmessages}></Chatbox>
                     </Col>
                 </Row>
                 <br />

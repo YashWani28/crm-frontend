@@ -7,14 +7,18 @@ import { useDispatch } from 'react-redux';
 import { fetchNewAccessToken } from '../../api/userApi';
 import { logout } from '../ClientLoginForm/clientLoginSlice';
 import { isTokenExpired } from '../../utils/decodeToken';
+import { useResetState } from '../../utils/resetState'; 
 
 const isauth = false;
 export const PrivateRoute = ({children }) => {
   const {isAuth} = useSelector(state=>state.login)
   const dispatch=useDispatch();
   const navigate = useNavigate();
-  
- 
+  const resetState = useResetState();
+  // 1. if refresh is valid and access is expired 
+  // 2. if refresh is expired and access is expired
+  // 3. if access does not exist and refresh is valid...
+  // 4. if refresh is expired and access does not exist
   useEffect(()=>{
     const updateAccessJWT = async () => {
       // const result = await fetchNewAccessToken();
@@ -22,6 +26,7 @@ export const PrivateRoute = ({children }) => {
       //? logout condition to prevent from going back
       if(!sessionStorage.getItem("CRM_accessJWT") && !localStorage.getItem("CRM_refreshJWT"))
       {
+        resetState();
         navigate('/login');
       }
 
@@ -31,6 +36,7 @@ export const PrivateRoute = ({children }) => {
         alert("sesion expired.please login again");
         sessionStorage.removeItem("CRM_accessJWT");
         localStorage.removeItem("CRM_refreshJWT");
+        resetState();
         navigate('/login');
 
       }

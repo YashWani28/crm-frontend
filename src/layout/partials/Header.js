@@ -4,17 +4,18 @@ import { Link,Navigate,NavLink,useNavigate } from 'react-router-dom';
 import './Header.css'; // Import your custom CSS file for styling
 import { logoutUser } from '../../api/userApi';
 import { isTokenExpired } from '../../utils/decodeToken';
-
+import { useResetState } from '../../utils/resetState'; 
 
 
 export const Header = () => {
   const navigate=useNavigate();
+  const resetState = useResetState();
   const logout = async()=>{
     alert("You have been logged out.");
     if(!isTokenExpired(sessionStorage.getItem("CRM_accessJWT"))){
       await logoutUser();
-
     }
+    resetState();
     sessionStorage.removeItem('CRM_accessJWT');
     localStorage.removeItem('CRM_refreshJWT');
     navigate('/login');

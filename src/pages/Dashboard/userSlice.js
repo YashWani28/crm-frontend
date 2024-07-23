@@ -21,9 +21,14 @@ const userSlice = createSlice({
             state.isLoading=false;
             state.error=payload
         },
+        resetUserState:(state)=>{
+            state.user=initialState.user;
+            state.isLoading=initialState.isLoading;
+            state.error=initialState.error;
+        }
     }
 });
 
 const {reducer,actions}=userSlice
-export const {getUserPending,getUserSuccess,getUserFail}=actions;
+export const {getUserPending,getUserSuccess,getUserFail,resetUserState}=actions;
 export default reducer;

@@ -24,7 +24,7 @@ export const ClientTicketTable = () => {
                 {filteredTickets.length ? filteredTickets.map((data, indx) => {
                     return (
                         //! WOW !!!
-                        <LinkContainer to={`/ticket/${indx}`} key={indx} className="table-link hoverrow">
+                        <LinkContainer to={`/ticket/${data._id}`} key={indx} className="table-link hoverrow">
                             <tr >
                                 <td>{indx + 1}</td>
                                 <td>{data.issue}</td>

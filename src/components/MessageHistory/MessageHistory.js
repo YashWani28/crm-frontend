@@ -14,18 +14,18 @@ export const MessageHistory = ({ history }) => {
               <Row>
                 <Col className='sentinfo text-end'>
                   <div className='bluecolor'>{message.sentby}</div>
-                  <div className='bluecolor'>{message.messagedate}</div>
-                  <div className='bluecolor'>{message.messagetime}</div>
+                  <div className='bluecolor'>{new Date(message.messagedate).toLocaleDateString()}</div>
+                  <div className='bluecolor'>{new Date(message.messagedate).toLocaleTimeString()}</div>
                 </Col>
                 <Col className='messagebody'>{message.messagebody}</Col>
               </Row>
             }
-            {message.sentby === "operator" &&
+            {message.sentby === "admin" &&
               <Row>
                 <Col xs={1} className='sentinfo text-start '>
                   <div className='bluecolor'>{message.sentby}</div>
-                  <div className='bluecolor'>{message.messagedate}</div>
-                  <div className='bluecolor'>{message.messagetime}</div>
+                  <div className='bluecolor'>{new Date(message.messagedate).toLocaleDateString()}</div>
+                  <div className='bluecolor'>{new Date(message.messagedate).toLocaleTimeString()}</div>
                 </Col>
                 <Col xs={5} className='messagebody'>{message.messagebody}</Col>
               </Row>

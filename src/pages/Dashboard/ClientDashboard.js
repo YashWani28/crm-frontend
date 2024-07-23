@@ -1,11 +1,23 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { Container,Row,Col,Button } from 'react-bootstrap'
 import { ClientTicketTable } from '../../components/ClientTicketTable/ClientTicketTable'
 import dummydata from '../../assets/dummyticket.json';
 import { ClientBreadCrumb } from '../../components/ClientBreadCrumb/ClientBreadCrumb';
+import { useSelector,useDispatch } from 'react-redux';
+import { fetchAllTickets } from '../ClientTicketListingPage/ticketsAction';
 
 export const ClientDashboard = () => {
+    const {tickets}=useSelector(state=>state.tickets);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        if(!tickets.length){
+            dispatch(fetchAllTickets());
+        }
+    },[tickets,dispatch]);
+    
+    const pendingTickets = Array.isArray(tickets) ? tickets.filter(row => row.status !== "Issue Resolved") : [];
+    const resolvedTickets = Array.isArray(tickets) ? tickets.length - pendingTickets.length : 0;
   return (
     <Container>
         <Row>
@@ -24,19 +36,19 @@ export const ClientDashboard = () => {
         </Row>
         <Row>
             <Col className='text-center mb-4'>
-                <div>Pending Tickets: 3</div>
-                <div>Resolved Tickets: 47</div>
-                <div>Total Tickets: 50</div>
+                <div>Pending/Inresolution Tickets: {pendingTickets.length}</div>
+                <div>Resolved Tickets: {resolvedTickets}</div>
+                <div>Total Tickets: {tickets.length}</div>
 
             </Col>
         </Row>
-        <Row>Recently Added Tickets</Row>
+        {/* <Row>Recently Added Tickets</Row>
         <hr/>
         <Row>
             <Col className='clientRecentTicket text-center'>
                 <ClientTicketTable dummydata={dummydata}></ClientTicketTable>
             </Col>
-        </Row>
+        </Row> */}
     </Container>
   )
 }
